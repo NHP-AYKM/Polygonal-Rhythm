@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public class Globals {
 
-    public static final int SCREEN_WIDTH = 1250; // WIDTH OF THE SCREEN
-    public static final int SCREEN_HEIGHT = 800; // HEIGHT OF THE SCREEN
+    public static final int SCREEN_WIDTH = 1280; // WIDTH OF THE SCREEN
+    public static final int SCREEN_HEIGHT = 720; // HEIGHT OF THE SCREEN
 
     public static final int floor = SCREEN_HEIGHT - 50; // THE Y VALUE FOR THE FLOOR
     public static final int gridWidth = 75; // WIDTH OF EACH GRID (used in level load)

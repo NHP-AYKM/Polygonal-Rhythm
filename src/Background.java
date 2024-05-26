@@ -101,7 +101,7 @@ public class Background {
 
 
 
-        g.setColor(new Color((int)red, (int)green, (int)blue, 80));
+        g.setColor(new Color((int)red, (int)green, (int)blue, 77));
         g.fillRect(0, 0, Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
 
         int tmp = 250;

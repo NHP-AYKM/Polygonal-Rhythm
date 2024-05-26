@@ -1,52 +1,55 @@
 // GameFrame.java
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /*
-GameFrame is where GamePanel gets displayed. It controls music playing and stopping for each game level and loading the game
+GameFrame is where GamePanel gets displayed. It controls music playing and stoppping for each game level and loading the game
 -Daisy
  */
 
 public class GameFrame extends JFrame implements ActionListener {
-    static GamePanel polygonalRhythm = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
+    static GamePanel geometryDash = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
 
 
     public GameFrame() {
-        super("Polygonal Rhythm");
+        super("Geometry Dash");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
-        add(polygonalRhythm);
+        add(geometryDash);
         setIconImage(Globals.windowIcon.getImage());
     }
 
     public void actionPerformed(ActionEvent e) {
-        polygonalRhythm.move();
-        polygonalRhythm.repaint();
+        geometryDash.move();
+        geometryDash.repaint();
     }
 
     public static void stopTimer() {
-        polygonalRhythm.timer.stop();
+        geometryDash.timer.stop();
     }
 
     public static void RESET() {//reset the player
-        polygonalRhythm.resetPlayer();
+        geometryDash.resetPlayer();
     }
 
     //start the level timer, reload map to reset the game
     public static void startTimer(int lv) {
         if (lv == 1) {
-            polygonalRhythm.mapReload(Globals.map1, Globals.StereoMadnessSound);
+            geometryDash.mapReload(Globals.map1, Globals.StereoMadnessSound);
 
         } else if (lv == 2) {
-            polygonalRhythm.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
+            geometryDash.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
 
         } else if (lv == 3) {
-            polygonalRhythm.mapReload(Globals.map3, Globals.JumperSound);
+            geometryDash.mapReload(Globals.map3, Globals.JumperSound);
         }
 
-        polygonalRhythm.timer.start();
+        geometryDash.timer.start();
     }
 
     //stop all sound

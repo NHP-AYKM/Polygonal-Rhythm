@@ -23,7 +23,7 @@ public class ControlCenter extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        start();
+        toMainMenu();
     }
 
 
@@ -46,17 +46,18 @@ public class ControlCenter extends JFrame implements ActionListener {
     public static void enterGame(int lvl){
 
         System.out.println("entering game >>>>>>>>>>>>>>>");
-        MenuF.menu.timer.stop();
-        MenuF.setVisible(false);
 
+
+        GameF.startTimer(lvl);
+        GameF.setVisible(true);
         pauseMenu.timer.stop();
         pauseMenu.setVisible(false);
 
-        GameF.startTimer(lvl);
-        GameF.setVisible(true);
+        MenuF.menu.timer.stop();
+        MenuF.setVisible(false);
 
-        GameF.startTimer(lvl);
-        GameF.setVisible(true);
+        //GameF.startTimer(lvl);
+       // GameF.setVisible(true);
 
         GameF.startGameSound(MenuPanel.targetLevel);
 
@@ -69,6 +70,8 @@ public class ControlCenter extends JFrame implements ActionListener {
         GameF.stopTimer();
         GameF.setVisible(false);
         GameF.stopGameSound();
+
+        pauseMenu.pausemenu.mousePressed=false;
 
         pauseMenu.pausemenu.timer.start();
         MenuF.setVisible(false);
@@ -84,8 +87,7 @@ public class ControlCenter extends JFrame implements ActionListener {
         pauseMenu.pausemenu.timer.stop();
         pauseMenu.setVisible(false);
         MenuF.setVisible(false);
-
-        GameF.polygonalRhythm.timer.start();
+        GameF.geometryDash.timer.start();
         GameF.setVisible(true);
         GameF.startGameSound(MenuPanel.targetLevel);
 
