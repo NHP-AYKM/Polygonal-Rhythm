@@ -18,7 +18,7 @@ public class MenuFrame extends JFrame implements ActionListener {
     // constructor
     public MenuFrame() {
         super("Geometry Dash");
-        timer = new Timer(1000/100, this);
+        timer = new Timer(1000/60, this);
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);

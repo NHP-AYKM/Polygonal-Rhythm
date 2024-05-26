@@ -17,7 +17,7 @@ import java.io.File;
 
 
 class GamePanel extends JPanel implements KeyListener, ActionListener, MouseListener, MouseMotionListener {
-    Timer timer = new Timer(1000/50, this);
+    Timer timer = new Timer(1000/60, this);
     static Player player;
     BufferedImage groundLinePic = Util.resize(Util.loadBuffImage("assets/ground/ground1.png"), Globals.SCREEN_WIDTH, 5);
     Background bg = new Background(Util.loadBuffImage("assets/background/stereoBG.png"), Util.loadBuffImage("assets/ground/ground1.png"));
@@ -61,7 +61,6 @@ class GamePanel extends JPanel implements KeyListener, ActionListener, MouseList
         create();
         destroy();
 
-        changeGamemode();
 
         repaint();
 
@@ -256,22 +255,6 @@ class GamePanel extends JPanel implements KeyListener, ActionListener, MouseList
     }
 
 
-// cheat buttonsl for dbug too
-    public void changeGamemode() {
-        if(keys[KeyEvent.VK_1]) {
-            player.setGamemode("cube");
-            player.setInitY(-41.5);
-        }
-        if(keys[KeyEvent.VK_2]) {
-            player.setGamemode("ship");
-            player.setAngle( 0 );
-        }
-
-        if(keys[KeyEvent.VK_4]) {
-            player.changeYdirection = true;;
-        }
-
-    }
 
     //reset the player to starting position
     public static void resetPlayer() {
@@ -455,10 +438,8 @@ class GamePanel extends JPanel implements KeyListener, ActionListener, MouseList
 //navigate to main menu
         if (code == KeyEvent.VK_ESCAPE) {
             if (keys[code] == false) {
-
+                keys[code] = true;
                 if (player.win) {
-                    
-                    keys[code] = true;
                     ControlCenter.toMainMenu();
                 }
                 else {

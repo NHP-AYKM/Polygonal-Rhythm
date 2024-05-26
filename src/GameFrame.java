@@ -13,43 +13,43 @@ GameFrame is where GamePanel gets displayed. It controls music playing and stopp
  */
 
 public class GameFrame extends JFrame implements ActionListener {
-    static GamePanel geometryDash = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
+    static GamePanel polygonalRhythm = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
 
 
     public GameFrame() {
-        super("Geometry Dash");
+        super("Polygonal Rhythm");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
-        add(geometryDash);
+        add(polygonalRhythm);
         setIconImage(Globals.windowIcon.getImage());
     }
 
     public void actionPerformed(ActionEvent e) {
-        geometryDash.move();
-        geometryDash.repaint();
+        polygonalRhythm.move();
+        polygonalRhythm.repaint();
     }
 
     public static void stopTimer() {
-        geometryDash.timer.stop();
+        polygonalRhythm.timer.stop();
     }
 
     public static void RESET() {//reset the player
-        geometryDash.resetPlayer();
+        polygonalRhythm.resetPlayer();
     }
 
     //start the level timer, reload map to reset the game
     public static void startTimer(int lv) {
         if (lv == 1) {
-            geometryDash.mapReload(Globals.map1, Globals.StereoMadnessSound);
+            polygonalRhythm.mapReload(Globals.map1, Globals.StereoMadnessSound);
 
         } else if (lv == 2) {
-            geometryDash.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
+            polygonalRhythm.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
 
         } else if (lv == 3) {
-            geometryDash.mapReload(Globals.map3, Globals.JumperSound);
+            polygonalRhythm.mapReload(Globals.map3, Globals.JumperSound);
         }
 
-        geometryDash.timer.start();
+        polygonalRhythm.timer.start();
     }
 
     //stop all sound

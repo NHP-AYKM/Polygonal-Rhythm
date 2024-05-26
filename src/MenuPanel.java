@@ -58,7 +58,7 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
     boolean tutorialButtonHover = false;
     boolean mouseDown = false; // if mouse is held
 
-    int titleWidth = 1050; int titleHeight = 180; // dimensions of the title image
+    int titleWidth = 1250; int titleHeight = 180; // dimensions of the title image
 
     int switchButtonWidth = 75; int switchButtonHeight = 100; // dimensions of the (hitboxes) next/prev buttons in level select
     int loadButtonWidth = 600; int loadButtonHeight = 300; // dimensions of the big button that loads the level
@@ -109,7 +109,7 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         }
 
 
-        lvlNames[1] = "Stereo Madness"; lvlNames[2] = "Base After Base"; lvlNames[3] = "Jumper"; // Set level names
+        lvlNames[1] = "Easy"; lvlNames[2] = "Normal"; lvlNames[3] = "Hard"; // Set level names
         difficultyFaces[1] = easyFace; difficultyFaces[2] = hardFace; difficultyFaces[3] = harderFace; // Set difficulty faces
 
         // Add listeners

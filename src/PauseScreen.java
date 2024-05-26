@@ -18,7 +18,7 @@ public class PauseScreen extends JFrame implements ActionListener {
     static public PausePanel pausemenu = new PausePanel(); // the panel for the pause screen
     Timer timer = new Timer(1000/60, this);
     public PauseScreen() {
-        super("Geometry Dash - GAME PAUSED");
+        super("Polygonal Rhythm - PAUSED");
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);

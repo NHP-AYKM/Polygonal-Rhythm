@@ -23,7 +23,7 @@ public class ControlCenter extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        toMainMenu();
+        start();
     }
 
 
@@ -87,7 +87,7 @@ public class ControlCenter extends JFrame implements ActionListener {
         pauseMenu.pausemenu.timer.stop();
         pauseMenu.setVisible(false);
         MenuF.setVisible(false);
-        GameF.geometryDash.timer.start();
+        GameF.polygonalRhythm.timer.start();
         GameF.setVisible(true);
         GameF.startGameSound(MenuPanel.targetLevel);
 

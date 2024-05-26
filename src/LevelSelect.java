@@ -40,7 +40,7 @@ public class LevelSelect extends JPanel implements KeyListener, ActionListener, 
 //        startButton = Util.resize(startButton, buttonWidth, buttonHeight);
 //        title = Util.resize(title, titleWidth, titleHeight);
 
-        Timer timer = new Timer(1000/100, this);
+        Timer timer = new Timer(1000/1000, this);
         timer.start();
 
         // Add listeners
