@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ICS4U FSE:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ICS4U_FSE_jar</output-path>
+    <root id="archive" name="ICS4U FSE.jar">
+      <element id="module-output" name="OOP Project" />
+    </root>
+  </artifact>
+</component>
