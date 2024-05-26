@@ -17,7 +17,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     // constructor
     public MenuFrame() {
-        super("Polygonal Rhythm");
+        super("Geometry Dash");
         timer = new Timer(1000/60, this);
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

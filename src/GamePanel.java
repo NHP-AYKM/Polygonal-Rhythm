@@ -60,6 +60,8 @@ class GamePanel extends JPanel implements KeyListener, ActionListener, MouseList
         // for cosmetics
         create();
         destroy();
+
+
         repaint();
 
     }
@@ -436,19 +438,18 @@ class GamePanel extends JPanel implements KeyListener, ActionListener, MouseList
 //navigate to main menu
         if (code == KeyEvent.VK_ESCAPE) {
             if (keys[code] == false) {
-
+                keys[code] = true;
                 if (player.win) {
                     ControlCenter.toMainMenu();
                 }
                 else {
+                    keyReleased(e);
                     ControlCenter.pauseGame();
+                    System.out.println("Pause");
                 }
             }
         }
 
-
-
-        keys[code] = true;
     }
 
     public void keyReleased(KeyEvent e) {

@@ -139,7 +139,7 @@ public class Player{
             angleAdjust();
         }
 
-        //set on surface to false, then check through all solids and ground to determine if layer is on surface
+        //set on surface to false, then check through all solids and ground to determine if lpayer is on surface
         onSurface = false;
 
         //normal collision

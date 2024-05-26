@@ -1,11 +1,14 @@
 // GameFrame.java
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /*
-GameFrame is where GamePanel gets displayed. It controls music playing and stopping for each game level and loading the game
+GameFrame is where GamePanel gets displayed. It controls music playing and stoppping for each game level and loading the game
 -Daisy
  */
 
