@@ -17,10 +17,10 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     // constructor
     public MenuFrame() {
-        super("Geometry Dash");
+        super("Elemental World");
         timer = new Timer(1000/60, this);
         timer.start();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
 
         add(menu); // adding the panel

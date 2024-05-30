@@ -1,55 +1,52 @@
 // GameFrame.java
 
-import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 /*
-GameFrame is where GamePanel gets displayed. It controls music playing and stoppping for each game level and loading the game
+GameFrame is where GamePanel gets displayed. It controls music playing and stopping for each game level and loading the game
 -Daisy
  */
 
 public class GameFrame extends JFrame implements ActionListener {
-    static GamePanel polygonalRhythm = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
+    static GamePanel elementalWorld = new GamePanel(Globals.map1, Globals.StereoMadnessSound);
 
 
     public GameFrame() {
-        super("Polygonal Rhythm");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super("Elemental World");
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
-        add(polygonalRhythm);
+        add(elementalWorld);
         setIconImage(Globals.windowIcon.getImage());
     }
 
     public void actionPerformed(ActionEvent e) {
-        polygonalRhythm.move();
-        polygonalRhythm.repaint();
+        elementalWorld.move();
+        elementalWorld.repaint();
     }
 
     public static void stopTimer() {
-        polygonalRhythm.timer.stop();
+        elementalWorld.timer.stop();
     }
 
     public static void RESET() {//reset the player
-        polygonalRhythm.resetPlayer();
+        elementalWorld.resetPlayer();
     }
 
     //start the level timer, reload map to reset the game
     public static void startTimer(int lv) {
         if (lv == 1) {
-            polygonalRhythm.mapReload(Globals.map1, Globals.StereoMadnessSound);
+            elementalWorld.mapReload(Globals.map1, Globals.StereoMadnessSound);
 
         } else if (lv == 2) {
-            polygonalRhythm.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
+            elementalWorld.mapReload(Globals.map2, Globals.BaseAfterBaseSounds);
 
         } else if (lv == 3) {
-            polygonalRhythm.mapReload(Globals.map3, Globals.JumperSound);
+            elementalWorld.mapReload(Globals.map3, Globals.JumperSound);
         }
 
-        polygonalRhythm.timer.start();
+        elementalWorld.timer.start();
     }
 
     //stop all sound

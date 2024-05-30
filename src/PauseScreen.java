@@ -18,9 +18,9 @@ public class PauseScreen extends JFrame implements ActionListener {
     static public PausePanel pausemenu = new PausePanel(); // the panel for the pause screen
     Timer timer = new Timer(1000/60, this);
     public PauseScreen() {
-        super("Polygonal Rhythm - PAUSED");
+        super("Elemental World");
         timer.start();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
         add(pausemenu);
         pausemenu.timer.start();
@@ -54,7 +54,7 @@ class PausePanel extends JPanel implements KeyListener, ActionListener, MouseLis
     // The images for the buttons
     public BufferedImage playButtonImg = Util.resize(Util.loadBuffImage("assets/buttons/play.png"), playButtonWidth, playButtonHeight);
     public BufferedImage menuButtonImg = Util.resize(Util.loadBuffImage("assets/buttons/menu.png"), buttonWidth, buttonHeight);
-    public BufferedImage playButtonHoverImg = Util.resize(Util.loadBuffImage("assets/buttons/play.png"), playButtonWidth + 30, playButtonHeight + 30);
+    public BufferedImage playButtonHoverImg = Util.resize(Util.loadBuffImage("assets/buttons/play.png"), playButtonWidth + 60, playButtonHeight + 60);
     public BufferedImage menuButtonHoverImg = Util.resize(Util.loadBuffImage("assets/buttons/menu.png"), buttonWidth + 30, buttonHeight + 30);
     public BufferedImage practiceButtonImg = Util.resize(Util.loadBuffImage("assets/buttons/practice.png"), buttonWidth, buttonHeight);
     public BufferedImage practiceButtonHoverImg = Util.resize(Util.loadBuffImage("assets/buttons/practice.png"), buttonWidth + 30, buttonHeight + 30);
@@ -104,13 +104,11 @@ class PausePanel extends JPanel implements KeyListener, ActionListener, MouseLis
     }
 
 
-    BufferedImage backgroundImg = Util.loadBuffImage("assets/background/stereoBG.png");
-    BufferedImage groundImg = Util.loadBuffImage("assets/ground/ground1.png");
-    Background bg1 = new Background(backgroundImg, groundImg);
 
     public void paint(Graphics g) {
         super.paint(g);
-        bg1.mainMenuDraw(g);
+
+
         // background
         g.setColor(new Color(0, 0, 0, 228));
         g.fillRect(0, 0, Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
@@ -188,15 +186,14 @@ class PausePanel extends JPanel implements KeyListener, ActionListener, MouseLis
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        keys[code] = true;
         // pressing space resumes the game and pressing escape exits to the level select screen
         if (code == KeyEvent.VK_SPACE) {
             resume();
         }
         else if (code == KeyEvent.VK_ESCAPE) {
-            keyReleased(e);
             ControlCenter.toMainMenu();
         }
+        keys[code] = true;
     }
 
 
@@ -216,11 +213,9 @@ class PausePanel extends JPanel implements KeyListener, ActionListener, MouseLis
         int mouseY = e.getY();
 
         if (!mousePressed) {
-            
             mousePressed = true;
             if (playButtonHitbox.contains(mouseX, mouseY)) { // resume game button
                 System.out.println("PLAYBUTTONPRESSED");
-
                 resume();
             }
             else if (menuButtonHitbox.contains(mouseX, mouseY)) { // menu button

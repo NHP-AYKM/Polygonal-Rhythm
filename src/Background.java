@@ -108,15 +108,6 @@ public class Background {
         g.drawImage(groundLine, 0, GroundY + offsetY, Globals.SCREEN_WIDTH, 5, null);
 
 
-        //change the color gradually
-        red += 0.1;
-        blue += 0.2 ;
-        green -= 0.3;
-
-        red = (red + 255) % 255;
-        blue = (blue  + 255)% 255;
-        green = (green  + 255)% 255;
-
 
 
 

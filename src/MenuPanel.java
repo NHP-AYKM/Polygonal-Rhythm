@@ -1,7 +1,7 @@
 /*
-    * MenuPanel.java
-    *
-    * This class is responsible for the main menu and the level selection menu.
+ * MenuPanel.java
+ *
+ * This class is responsible for the main menu and the level selection menu.
  */
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
     BufferedImage background;
     BufferedImage startButton;
     BufferedImage creditButton;
-    BufferedImage tutorialButton;
+    BufferedImage guideButton;
     Rectangle buttonHitbox;
     BufferedImage backgroundImg = Util.loadBuffImage("assets/background/stereoBG.png");
     BufferedImage groundImg = Util.loadBuffImage("assets/ground/ground1.png");
@@ -37,7 +37,11 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
     BufferedImage groundSquare = Util.resize(Util.loadBuffImage("assets/ground/ground1.png"), 250, 250);
     BufferedImage groundLine = Util.resize(Util.loadBuffImage("assets/ground/groundLine.png"), Globals.SCREEN_WIDTH, 5);
 
-    BufferedImage levelSelectBackground = Util.resize(Util.loadBuffImage("assets/background/gradient.png"), Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
+    BufferedImage [] levelBackground = new BufferedImage[4];
+    BufferedImage backGroundLevel1 = Util.resize(Util.loadBuffImage("assets/background/forest.png"), Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
+    BufferedImage backGroundLevel2 = Util.resize(Util.loadBuffImage("assets/background/water.png"), Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
+    BufferedImage backGroundLevel3 = Util.resize(Util.loadBuffImage("assets/background/fire.png"), Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
+
     BufferedImage [] difficultyFaces = new BufferedImage[4];
     BufferedImage easyFace = Util.resize(Util.loadBuffImage("assets/difficultyFaces/easy.png"), 50, 50);
     BufferedImage hardFace = Util.resize(Util.loadBuffImage("assets/difficultyFaces/hard.png"), 50, 50);
@@ -53,12 +57,11 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
 
 
     int buttonWidth = 250; int buttonHeight = 250; // dimensions of the start button in main menu
-    boolean startButtonHover = false; // whether or not the mouse is hovering over the start button in main menu
+    boolean hover = false; // whether or not the mouse is hovering over the start button in main menu
     boolean creditButtonHover = false;
-    boolean tutorialButtonHover = false;
     boolean mouseDown = false; // if mouse is held
 
-    int titleWidth = 1250; int titleHeight = 180; // dimensions of the title image
+    int titleWidth = 1250; int titleHeight = 200; // dimensions of the title image
 
     int switchButtonWidth = 75; int switchButtonHeight = 100; // dimensions of the (hitboxes) next/prev buttons in level select
     int loadButtonWidth = 600; int loadButtonHeight = 300; // dimensions of the big button that loads the level
@@ -66,9 +69,12 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
     Rectangle nextButtonHitbox = new Rectangle(Globals.SCREEN_WIDTH - 20 - switchButtonWidth, (Globals.SCREEN_HEIGHT/2) - (switchButtonHeight/2), switchButtonWidth, switchButtonHeight);
     Rectangle prevButtonHitbox = new Rectangle(20, (Globals.SCREEN_HEIGHT/2) - (switchButtonHeight/2), switchButtonWidth, switchButtonHeight);
     Rectangle loadLevelHitbox = new Rectangle((Globals.SCREEN_WIDTH/2) - (loadButtonWidth/2), 100, loadButtonWidth, loadButtonHeight);
-
+    //Rectangle guideButtonHitbox = new Rectangle(Globals.SCREEN_WIDTH - 100, 70, 50, 50);
     // If mouse is hovered over the buttons
-    boolean nextButtonHover = false; boolean prevButtonHover = false; boolean loadButtonHover = false;
+    boolean nextButtonHover = false; 
+    boolean prevButtonHover = false; 
+    boolean loadButtonHover = false; 
+    boolean guideButtonHover = false;
 
     public static String [] lvlNames = new String[4]; // Array of level names. Used to display the level name in level select
 
@@ -81,17 +87,15 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         requestFocus();
 
         // Load and resize images
-        title = Util.loadBuffImage("assets/logos/title.png");
+        title = Util.loadBuffImage("assets/logos/title.png"); 
         credit = Util.loadBuffImage("assets/logos/credit.png");
         background = Util.loadBuffImage("assets/background/background1.png");
         startButton = Util.loadBuffImage("assets/logos/playButton.png");
         startButton = Util.resize(startButton, buttonWidth, buttonHeight);
         creditButton = Util.loadBuffImage("assets/logos/creditButton.png");
         creditButton = Util.resize(creditButton, buttonWidth/2, buttonHeight/2);
-        tutorialButton = Util.loadBuffImage("assets/logos/tutorialButton.png");
-        tutorialButton = Util.resize(tutorialButton, buttonWidth/2, buttonHeight/2);
         title = Util.resize(title, titleWidth, titleHeight);
-
+        guideButton = Util.resize(Util.loadBuffImage("assets/buttons/guide.png"), buttonWidth/2, buttonHeight/2);
 
         // FONTS
         fontSys = new Font("Montserat", Font.PLAIN, 32);
@@ -111,21 +115,21 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
 
         lvlNames[1] = "Easy"; lvlNames[2] = "Normal"; lvlNames[3] = "Hard"; // Set level names
         difficultyFaces[1] = easyFace; difficultyFaces[2] = hardFace; difficultyFaces[3] = harderFace; // Set difficulty faces
-
+        levelBackground[1] = backGroundLevel1; levelBackground[2] = backGroundLevel2; levelBackground[3] = backGroundLevel3;
         // Add listeners
         addKeyListener(this);
         addMouseListener(this);
         addMouseMotionListener(this);
     }
 
-    public Rectangle startButtonHitbox() { // Returns the hitbox of the start button
+    public Rectangle getButtonHitbox() { // Returns the hitbox of the start button
         return new Rectangle(Globals.SCREEN_WIDTH / 2 - (buttonWidth/2), Globals.SCREEN_HEIGHT/2 - (buttonHeight/2), buttonWidth, buttonHeight);
     }
     public Rectangle creditButtonHitbox() { // Returns the hitbox of the credit button
-        return new Rectangle(Globals.SCREEN_WIDTH / 2 - (buttonWidth/2) - 10, Globals.SCREEN_HEIGHT/4*3 - (buttonHeight/4), buttonWidth/2, buttonHeight/2);
+        return new Rectangle(Globals.SCREEN_WIDTH / 4 - (buttonWidth/4) , Globals.SCREEN_HEIGHT/2 - (buttonHeight/4), buttonWidth/2, buttonHeight/2);
     }
-    public Rectangle tutorialButtonHitbox() { // Returns the hitbox of the tutorial button
-        return new Rectangle(Globals.SCREEN_WIDTH / 2 + 10, Globals.SCREEN_HEIGHT/4*3 - (buttonHeight/4), buttonWidth/2, buttonHeight/2);
+    public Rectangle guideButtonHitbox() { // Returns the hitbox of the tutorial button
+        return new Rectangle(Globals.SCREEN_WIDTH / 4 * 3 - (buttonWidth/4), Globals.SCREEN_HEIGHT/2 - (buttonHeight/4), buttonWidth/2, buttonHeight/2);
     }
 
     public void paintComponent(Graphics g) {
@@ -136,6 +140,9 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         }
         else if (screen == "levelSelect") { // If the user is on the level select menu
             levelSelectDraw(g);
+        }
+        else if (screen == "guide") {
+            guideDraw(g);
         }
         else if (screen == "credit"){
             creditDraw(g);
@@ -148,25 +155,24 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         g.drawImage(title, (Globals.SCREEN_WIDTH - titleWidth) / 2, 75, null); // draw title
 
         // hover effect for start button
-        if (!startButtonHover) {
+        if (!hover) {
             g.drawImage(startButton, Globals.SCREEN_WIDTH / 2 - (buttonWidth / 2), Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 2), null);
         }
         else {
             g.drawImage(startButton, Globals.SCREEN_WIDTH / 2 - (buttonWidth / 2) - 15, Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 2) - 15, buttonWidth + 30, buttonHeight + 30,null);
-        }
-        // hover effect for credit button
-        if (!creditButtonHover) {
-            g.drawImage(creditButton, Globals.SCREEN_WIDTH / 2 - (buttonWidth / 2 ) - 10, Globals.SCREEN_HEIGHT / 4 * 3 - (buttonHeight / 4), null);
+
+        }if (!creditButtonHover) {
+            g.drawImage(creditButton, Globals.SCREEN_WIDTH / 4 - (buttonWidth / 4 ), Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 4), null);
         }
         else {
-            g.drawImage(creditButton, Globals.SCREEN_WIDTH / 2 - (buttonWidth / 2 ) - 17, Globals.SCREEN_HEIGHT / 4 * 3 - (buttonHeight / 4) - 7, buttonWidth/2+15, buttonHeight/2 + 15,null);
+            g.drawImage(creditButton, Globals.SCREEN_WIDTH / 4- (buttonWidth / 4 ) - 7, Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 4) - 7, buttonWidth/2+15, buttonHeight/2 + 15,null);
         }
         // hover effect for tutorial button
-        if (!tutorialButtonHover) {
-            g.drawImage(tutorialButton, Globals.SCREEN_WIDTH / 2 + 10, Globals.SCREEN_HEIGHT / 4 * 3 - (buttonHeight / 4), null);
+        if (!guideButtonHover) {
+            g.drawImage(guideButton, Globals.SCREEN_WIDTH / 4 * 3 - (buttonWidth / 4), Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 4), null);
         }
         else {
-            g.drawImage(tutorialButton, Globals.SCREEN_WIDTH / 2 + 3, Globals.SCREEN_HEIGHT / 4 * 3 - (buttonHeight / 4) - 7, buttonWidth/2+15, buttonHeight/2 + 15,null);
+            g.drawImage(guideButton, Globals.SCREEN_WIDTH / 4 * 3 - (buttonWidth / 4) - 7, Globals.SCREEN_HEIGHT / 2 - (buttonHeight / 4) - 7, buttonWidth/2+15, buttonHeight/2 + 15,null);
         }
     }
     public void creditDraw(Graphics g){
@@ -180,9 +186,13 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         Util.drawCenteredString(g, "Nguyen Thi Tra My - 20225049", new Rectangle( 0, 400, creditButtonWidth, creditButtonHeight), lvlNameFont);
         Util.drawCenteredString(g,"Nguyen Hoang Phuc - 20225067", new Rectangle(0, 480, creditButtonWidth, creditButtonHeight), lvlNameFont);
     }
-    //draw for Level select
+    public void guideDraw(Graphics g) {
+        GuidePanel guide = new GuidePanel();
+        guide.guideDraw(g);
+    }
+
     public void levelSelectDraw(Graphics g) {
-        g.drawImage(levelSelectBackground, 0, 0, null); // draw background
+        g.drawImage(levelBackground[targetLevel], 0, 0, null); // draw background
 
         // buttons
         if (nextButtonHover) {
@@ -207,19 +217,18 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         }
 
 
-
         // draw level name + difficulty face
         Util.drawCenteredString(g, lvlNames[targetLevel], loadLevelHitbox, lvlNameFont);
         g.drawImage(difficultyFaces[targetLevel], (Globals.SCREEN_WIDTH/2) - 25 ,loadLevelHitbox.y + 200, null);
 
         // GROUND
-        for (int i=0; i<5; i++) {
+        /*for (int i=0; i<5; i++) {
             g.drawImage(groundSquare, (i * 250), Globals.SCREEN_HEIGHT - 150, null);
         }
         g.drawImage(groundLine, 0, Globals.SCREEN_HEIGHT - 150, null);
         g.setColor(new Color(0, 128, 255, 160));
         g.fillRect(0, Globals.SCREEN_HEIGHT - 150, Globals.SCREEN_WIDTH, 150);
-
+*/
 
         // draw best percentage bar
         int percent = Math.min(((Integer.parseInt(Util.readFile(Globals.scoreFile, targetLevel)) * 100)/ (Level.mapWidth * 75)) , 100);
@@ -246,7 +255,6 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
                 screen = "levelSelect";
             }
         }
-
         else if (screen == "levelSelect") { // while in level select
             if (code == KeyEvent.VK_ESCAPE) { // escape goes back to main menu
                 screen = "menu";
@@ -255,17 +263,19 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
                 ControlCenter.enterGame(targetLevel);
             }
         }
+        else if (screen == "guide") {
+            if (code == KeyEvent.VK_ESCAPE) {
+                screen = "menu";
+            }
+            else if (code == KeyEvent.VK_ENTER) {
+                screen = "levelSelect";
+            }
+        }
         else if (screen == "credit") { // while in credit
             if (code == KeyEvent.VK_ESCAPE) { // escape goes back to main menu
                 screen = "menu";
             }
         }
-        else if (screen == "tutorial") { // while in credit
-            if (code == KeyEvent.VK_ESCAPE) { // escape goes back to main menu
-                screen = "menu";
-            }
-        }
-
 
         keys[code] = true;
     }
@@ -299,20 +309,16 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
         // Check if the click is within the start button hitbox
         if (!mouseDown) {
             if (screen == "menu") {
-                if (startButtonHitbox().contains(mouseX, mouseY)) { // start button
+                if (getButtonHitbox().contains(mouseX, mouseY)) { // start button
                     // Handle start button click
 //                    System.out.println("Start button clicked!");
                     screen = "levelSelect";
                 }
-                if (creditButtonHitbox().contains(mouseX, mouseY)) { // start button
-                    // Handle credit button click
-//                    System.out.println("Start button clicked!");
+                if (creditButtonHitbox().contains(mouseX, mouseY)) {
                     screen = "credit";
                 }
-                if (tutorialButtonHitbox().contains(mouseX, mouseY)) { // start button
-                    // Handle credit button click
-//                    System.out.println("Start button clicked!");
-                    screen = "tutorial";
+                if (guideButtonHitbox().contains(mouseX, mouseY)) {
+                    screen = "guide";
                 }
             }
 
@@ -330,13 +336,10 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
 
                 targetLevel = (targetLevel +2 ) % 3 + 1; // wrap around
             }
-            else if (screen == "credit"){
-                
         }
 
         mouseDown = true;
     }
-}
 
     public void mouseMoved(MouseEvent e) {
         // Handle mouse move events
@@ -345,26 +348,24 @@ public class MenuPanel extends JPanel implements KeyListener, ActionListener, Mo
 
         // Checking if the mouse is hovering over buttons
         if (screen == "menu") { // while in menu
-            if (startButtonHitbox().contains(mouseX, mouseY)) { // PLAY BUTTON
+            if (getButtonHitbox().contains(mouseX, mouseY)) { // PLAY BUTTON
                 // hover
-                startButtonHover = true;
+                hover = true;
             } else {
                 // not hover
-                startButtonHover = false;
+                hover = false;
             }
-            if (creditButtonHitbox().contains(mouseX, mouseY)) { // PLAY BUTTON
-                // hover
+            if (creditButtonHitbox().contains(mouseX, mouseY)) { // start button
+                // Handle credit button click
                 creditButtonHover = true;
             } else {
-                // not hover
                 creditButtonHover = false;
             }
-            if (tutorialButtonHitbox().contains(mouseX, mouseY)) { // PLAY BUTTON
-                // hover
-                tutorialButtonHover = true;
+            if (guideButtonHitbox().contains(mouseX, mouseY)) { // start button
+                // Handle guide button click
+                guideButtonHover = true;
             } else {
-                // not hover
-                tutorialButtonHover = false;
+                guideButtonHover = false;
             }
         }
         else if (screen == "levelSelect") { // while in level select

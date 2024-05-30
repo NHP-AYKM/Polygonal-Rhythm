@@ -12,7 +12,6 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
-import java.util.List;
 
 public class Util {
     private BufferedImage pixelMap;
@@ -122,6 +121,7 @@ public class Util {
         g.setColor(Color.WHITE);
         g.drawString(text, x, y);
     }
+
     public static void stopSound(Clip music) {
         if (music != null) {
             music.stop();
@@ -165,9 +165,9 @@ public class Util {
             String line2 = reader.readLine();
             String line3 = reader.readLine();
 
-            //System.out.println(line1);
-            //System.out.println(line2);
-            //System.out.println(line3);
+           // System.out.println(line1);
+           // System.out.println(line2);
+           // System.out.println(line3);
 
             if (curLvl == 1) {
                 return line1;

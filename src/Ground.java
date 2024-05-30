@@ -40,16 +40,6 @@ public class Ground {
 
         g.setColor(new Color(red, green, blue, 77));
         g.fillRect(xx, yy-5, width, height+5);
-        if ( counter % 100 == 0) {
-            red = (int) (0.97 * red);
-            blue = (int) (0.97 * blue);
-            green = (int) (1.02 * green);
-            if (green > 255) {
-                green = 255;
-            }
-            counter = 1;
-        }
-        counter += 1;
     }
 
     public void move(int vx) { // moves the ground same speed as the player

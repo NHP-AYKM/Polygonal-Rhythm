@@ -29,7 +29,6 @@ public class Globals {
     static String BaseAfterBaseSounds = "soundTrack/BaseAfterBase.wav";
     static String JumperSound = "soundTrack/Jumper.wav";
 
-
     // SOUNDS
     public static Clip lvl1Sound = Util.getSound(Globals.StereoMadnessSound);
     public static Clip lvl2Sound = Util.getSound(BaseAfterBaseSounds);
@@ -44,5 +43,5 @@ public class Globals {
     public static int lvl3TopScore = Integer.parseInt(Util.readFile(Globals.scoreFile, 3 ));
 
 
-    public static ImageIcon windowIcon = new ImageIcon("assets/logos/GeometryDash.png"); // the icon for the window lol
+    public static ImageIcon windowIcon = new ImageIcon("assets/logos/ElementalWorld.png"); // the icon for the window lol
 }
